@@ -1,9 +1,16 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router';
+import SigninContainer from '../containers/SigninContainer';
+import { RootState } from '../types';
 
 export default function Signin() {
-  return (
-    <div>
-      <h1>Signin</h1>
-    </div>
-  )
+  const token = useSelector<RootState, string | null>(
+    (state) => state.auth.token
+  );
+
+  if (token != null ) {
+    return <Redirect to = "/"></Redirect>
+  }
+  return <SigninContainer />
 }
